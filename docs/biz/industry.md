@@ -2,7 +2,7 @@
 
 > **要約**: フィジカルAI（身体性AI）業界の**構造・トレンド・重要人物**をまとめた資料。「なぜ今このタイミングか」（[`concept.md`](./concept.md)）の裏付けであり、事業を業界の文脈に位置づけるための背景資料。
 >
-> 技術的な深掘りは [`tech-notes.md`](./tech-notes.md)、一次情報の一覧は [`references.md`](./references.md) を参照。
+> 技術的な深掘りは [`tech-notes.md`](../tech/tech-notes.md)、一次情報の一覧は [`references.md`](./references.md) を参照。
 
 ## スケーリング則とその陰り — 事業が立つフェーズ
 
@@ -17,7 +17,7 @@
 | **Sergey Levine／Chelsea Finn** | ロボット学習の中心人物、Physical Intelligence 創業陣。Levine の Substack「Learning and Control」の記事「The Promise of Generalist Robotic Policies」は必読 |
 | **Physical Intelligence（π）** | π0 モデルで業界の実質的な基準を作った。4億ドル以上調達、評価額24億ドル |
 | **NVIDIA** | Isaac Sim/Omniverse（シミュレーション）、GR00T（基盤モデル）、Jetson（計算基盤）でロボットAIの"Android"化を狙う |
-| **Data Scaling Laws 論文** | データの量・多様性（特に**環境と対象物の多様性**）が性能向上に直結することを実証。**分散型ToC収集の理論的裏付け**（[`tech-notes.md`](./tech-notes.md)） |
+| **Data Scaling Laws 論文** | データの量・多様性（特に**環境と対象物の多様性**）が性能向上に直結することを実証。**分散型ToC収集の理論的裏付け**（[`tech-notes.md`](../tech/tech-notes.md)） |
 | **LeRobot（Hugging Face）** | ロボット学習データの事実上の標準フォーマットを提供する OSS |
 | **Open X-Embodiment／DROID／AgiBot World** | 既存の大規模データセット。「何が足りないか」の参考になる |
 | キュレーション | GitHub「awesome-physical-ai」 |

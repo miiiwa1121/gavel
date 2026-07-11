@@ -1,6 +1,6 @@
 # 参考文献・情報源一覧 - gavel
 
-> **要約**: 本事業のリサーチで参照した一次情報・情報源の一覧。市場規模（[`market.md`](./market.md)）・競合（[`competitors.md`](./competitors.md)）・技術（[`tech-notes.md`](./tech-notes.md)）・業界動向（[`industry.md`](./industry.md)）の裏付け。
+> **要約**: 本事業のリサーチで参照した一次情報・情報源の一覧。市場規模（[`market.md`](./market.md)）・競合（[`competitors.md`](./competitors.md)）・技術（[`tech-notes.md`](../tech/tech-notes.md)）・業界動向（[`industry.md`](./industry.md)）の裏付け。
 >
 > ※市場動向・競合状況は変化が速い分野のため、**意思決定前に主要数値の再確認を推奨**（研究総括 2026-07-12 時点）。
 

@@ -2,7 +2,7 @@
 
 > **要約**: 未解決の論点と今後の検討事項を優先度順に並べたロードマップ。次に何を詰めるべきかを知りたいときに読む。決着した論点はここから外し、[`business-model.md`](./business-model.md) 等へ移す。
 >
-> 事業の全体像は [`concept.md`](./concept.md) を参照。現在は**企画・調査フェーズ**で、プロダクト実装はまだ着手していない（[`overview.md`](./overview.md)）。
+> 事業の全体像は [`concept.md`](./concept.md) を参照。現在は**企画・調査フェーズ**で、プロダクト実装はまだ着手していない（[`../overview.md`](../overview.md)）。
 
 ## 🔥 最重要の検証項目（事業リスク）
 
@@ -28,7 +28,7 @@
 - 手元動画に写り込む顔・個人情報の扱い（Asimov AI は自動ぼかしを採用）。
 
 ### 5. 収集手段の柔軟性の実装
-- スマホのみ運用と、器具配布（グリッパー等）を要する高精度収集の**切り替えをどう仕組み化するか**（[`business-model.md`](./business-model.md)・[`tech-notes.md`](./tech-notes.md)）。
+- スマホのみ運用と、器具配布（グリッパー等）を要する高精度収集の**切り替えをどう仕組み化するか**（[`business-model.md`](./business-model.md)・[`tech-notes.md`](../tech/tech-notes.md)）。
 
 ### 6. 競合の動きへの対応速度
 - **FastLabel の OpenLUTRA**（収集の裾野拡大）、**APTO のロボット特化シフト**への対応。
@@ -38,7 +38,7 @@
 
 - **自動アノテーションへの移行**: AI の認識精度が上がれば「AIが認識 → 投稿者が修正」の形へ（[`business-model.md`](./business-model.md)）。
 - **事業展開の第2・第3段階**: 企業への導入支援事業 → ロボットのソフトウェア領域そのものへ（[`concept.md`](./concept.md)）。
-- **仮想データ企業を顧客化する視点**: NVIDIA 等を競合でなく「現実の種データ」の供給先と捉える（[`tech-notes.md`](./tech-notes.md)）。
+- **仮想データ企業を顧客化する視点**: NVIDIA 等を競合でなく「現実の種データ」の供給先と捉える（[`tech-notes.md`](../tech/tech-notes.md)）。
 
 ## 保留・見送り（記録として）
 
