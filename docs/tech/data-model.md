@@ -1,8 +1,8 @@
-# データモデル（暫定・未確定）- gavel
+# データモデル（v1 一部確定・全体は暫定）- gavel
 
-> **要約**: 本事業がプロダクト化する際に**必ず必要になる論理エンティティ**を、事業モデルから逆算して**暫定的に**列挙したメモ。**現在は企画・調査フェーズであり、プロダクト/スキーマ設計には未着手。** ここに書くのは「後から変えると高くつくので、事業モデルが決まった今のうちに"効いてくる論点"を押さえておく」ためのもので、確定仕様ではない。
+> **要約**: 本事業がプロダクト化する際に**必ず必要になる論理エンティティ**を、事業モデルから逆算して列挙したメモ。**2026-07-12 に C側アプリ v1 の実装へ着手し、供給側に必要な部分を実装に合わせて確定**した（下記「§ v1 実装で確定したデータモデル」）。買い手・ライセンス・還元台帳は v1 では実装せず、暫定のまま将来へ持ち越す。
 >
-> 前提となる事業モデルは [`business-model.md`](../biz/business-model.md) を参照。
+> 前提となる事業モデルは [`business-model.md`](../biz/business-model.md)。v1 の実装コードは `Gavel/Domain/`、確定の根拠は [`devlog/2026-07.md`](../devlog/2026-07.md)（追記3以降）を参照。
 
 ## この事業でデータモデルが特に重要になる理由
 
@@ -30,6 +30,38 @@
 3. **売上と還元の対応が壊れない**こと。どの売上がどの供給者へ還元されたかが常に追える（レベニューシェアの信頼性＝供給者ロックインの前提）。
 4. **原本を保持**する（加工前データから何度でも別の加工・アノテーションを作れるように）。
 5. **個人情報（顔等）の扱いを構造で担保**する（[`roadmap.md`](../biz/roadmap.md) §4。ぼかし前後のどちらを許諾対象にするか等）。
+
+## v1 実装で確定したデータモデル（2026-07-12）
+
+C側アプリ v1（供給側）で必要なエンティティのみを実装した。物理設計は **「1投稿=1フォルダ」のファイルベース**（SwiftData/DB は使わない。理由は devlog 追記3の技術選定表）。
+
+### 実装したエンティティ ↔ コードの対応
+
+| 論理エンティティ | v1 実装 | 主なフィールド（確定） |
+|------------------|---------|------------------------|
+| **Contributor** | `Contributor`（`profile.json`・端末内単一） | id / displayName / inviteCode / mountType / consentAcceptedAt |
+| **Mission** | `Mission` ＋ `MissionCatalog`（コードに seed・少数常設） | id(slug) / title / category / summary / taskDescription / exampleGuidance / successConditions / shootingTips / min・maxClipDurationSec / recommendedMountType / isJapanSpecific / allowsAudioAnnotation |
+| **Submission** | `Submission`（`manifest.json`） | id / missionId / contributorId / createdAt / outcome / mountType / device / videoDurationSec / videoResolution / imuSampleCount / imuSampleRateHz / hasAudioAnnotation / privacyConfirmed / syncState / note |
+| **Media（原本）** | 投稿フォルダ内の実体ファイル `video.mov` / `imu.jsonl` | IMU は 1行1サンプルの JSONL（`IMUSample`: t / userAcceleration / rotationRate / gravity / attitude(quaternion)） |
+| **Annotation** | 任意の `annotation.m4a`（音声）＋ `Submission.hasAudioAnnotation` | v1 は後付け型ナレーション（撮影後） |
+| **Buyer / License / RevenueShareLedger** | **v1 未実装（暫定のまま）** | 売買が発生しない v1 では持たない。将来の需要側実装（`tech/business/`）で確定 |
+
+### 端末内の物理レイアウト（原本保持）
+
+```
+<Documents>/
+├── profile.json                       # Contributor（同意状態を含む）
+└── submissions/
+    └── <submissionId>/
+        ├── manifest.json              # Submission メタ（schemaVersion 付き・最後に書く＝完成マーカー）
+        ├── video.<ext>                # 映像原本（必須。拡張子は元ファイルを継承。実名は manifest.files.video に記録）
+        ├── imu.jsonl                  # 映像と時刻同期した IMU（必須）
+        └── annotation.<ext>           # 音声アノテーション（任意）
+```
+
+- **確定の根拠**: 「原本保持」（不変条件4）と、将来のデータセット納品形式（**LeRobot** の episode 単位）への変換しやすさを両立するため、投稿を自己記述的なフォルダ単位で持つ。`manifest.json` を最後に書くことで、その存在を「フォルダが完成した」コミットマーカーにできる（半端な書き込みを `all()` が拾わない）。
+- **時刻同期の確定（v1 の実装忠実度）**: IMU の `t` は**収録開始の瞬間を 0 とする相対秒**。基準は `start()` 呼び出し時の `systemUptime`（deviceMotion.timestamp と同じ「起動からの秒」時間基準）にアンカーする。映像も同時刻に開始し、停止時は **IMU を先に止めてから映像をファイナライズ**する（asset ロード遅延ぶんの末尾ドリフトを避ける）。よって映像と IMU は「収録開始の瞬間」を共通の起点として対応づく。公称サンプリングは 100Hz。**フレーム精度での厳密な映像 PTS 整合（サブフレーム同期）は実機での追い込み課題**であり、v1 は「対で必ず揃い、開始起点を共有する」ところまでを担保する。
+- **syncState**: v1 は実サーバ送信を行わないため既定 `pendingSync`（ローカル保持）。所有権は常に自社/供給者側に残り（不変条件1）、送信という外部公開は将来の同期実装で扱う。
 
 ## 今回はまだ決めない（次段以降）
 

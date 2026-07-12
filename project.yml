@@ -1,0 +1,62 @@
+name: Gavel
+# XcodeGen プロジェクト定義（正本）。生成物 Gavel.xcodeproj もコミットする方針
+# （コミット済みなら clone 後は XcodeGen 無しでも `xcodebuild` 可能）。再生成は `xcodegen generate`。
+
+options:
+  bundleIdPrefix: com.gavel
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"                 # Swift 6 language mode（strict concurrency 既定）
+    SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_TREAT_WARNINGS_AS_ERRORS: YES  # 警告をエラー化＝静的ゲート
+    GCC_TREAT_WARNINGS_AS_ERRORS: YES
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  Gavel:
+    type: application
+    platform: iOS
+    sources:
+      - path: Gavel
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gavel.customer
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: gavel
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
+        # 一人称マウント撮影で映像＋IMU＋任意音声を取得するための利用目的
+        INFOPLIST_KEY_NSCameraUsageDescription: "手元動作の映像を撮影するためにカメラを使用します。"
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: "任意の音声アノテーション（なぜそうしたかの実況/ナレーション）を録音するためにマイクを使用します。"
+        INFOPLIST_KEY_NSMotionUsageDescription: "映像と同期した加速度・ジャイロ（IMU）を記録するためにモーションセンサーを使用します。"
+
+  GavelTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: GavelTests
+    dependencies:
+      - target: Gavel
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gavel.customer.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  Gavel:
+    build:
+      targets:
+        Gavel: all
+        GavelTests: [test]
+    test:
+      targets:
+        - GavelTests
+      gatherCoverageData: true

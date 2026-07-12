@@ -1,0 +1,46 @@
+disabled_rules:
+  - todo                       # 実装途中の TODO を許容
+  - trailing_comma             # 複数行リテラルの末尾カンマを許容
+
+opt_in_rules:
+  - empty_count
+  - closure_spacing
+  - contains_over_first_not_nil
+  - first_where
+  - sorted_first_last
+  - force_unwrapping
+  - explicit_init
+  - redundant_nil_coalescing
+  - toggle_bool
+
+excluded:
+  - .build
+  - DerivedData
+  - Gavel.xcodeproj
+
+line_length:
+  warning: 140
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+
+type_body_length:
+  warning: 400
+  error: 550
+
+file_length:
+  warning: 600
+  error: 900
+
+function_body_length:
+  warning: 80
+  error: 140
+
+identifier_name:
+  min_length:
+    warning: 2
+  excluded: [id, x, y, z, w, t, i, dt, ok, up, vm]
+
+type_name:
+  min_length: 3
+  max_length: 50
