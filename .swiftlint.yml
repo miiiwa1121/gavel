@@ -17,6 +17,7 @@ excluded:
   - .build
   - DerivedData
   - Gavel.xcodeproj
+  - scripts          # 単体で動かす検証ツール（アプリ本体の規約対象外）
 
 line_length:
   warning: 140

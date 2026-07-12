@@ -8,6 +8,7 @@
 |----------|------|
 | [`requirements.md`](./requirements.md) | **C側アプリの要件定義（正本）**。決定仕様・設計判断・未確定事項 |
 | [`screens.md`](./screens.md) | 画面一覧・画面遷移（実装状況つき） |
+| [`device-smoke-test.md`](./device-smoke-test.md) | 実機 smoke test 手順（F-1・映像＋IMU実収録の検証） |
 
 ## このアプリの位置づけ
 

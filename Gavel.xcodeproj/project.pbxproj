@@ -100,7 +100,7 @@
 		3E97C5661F7597E1F6231ADA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		40DB2E38F65F0766C698AE83 /* SubmissionManifestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionManifestTests.swift; sourceTree = "<group>"; };
 		42886857D3B1ED9794C30DE0 /* CoreMotionRecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionRecordingService.swift; sourceTree = "<group>"; };
-		4695D4EA0168623B0C0F4766 /* Gavel.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Gavel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4695D4EA0168623B0C0F4766 /* Gavel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gavel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		471F4A9E8BB0D38923081778 /* QualityStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualityStandard.swift; sourceTree = "<group>"; };
 		4E76EFC3F1E604AE4C86B538 /* ConsentText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentText.swift; sourceTree = "<group>"; };
 		4FA957D33550D7A8BAA20AB5 /* FrameMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameMetrics.swift; sourceTree = "<group>"; };
@@ -422,8 +422,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 4FDFBDDA80745FA59ADACB5D /* Build configuration list for PBXProject "Gavel" */;
 			developmentRegion = en;
@@ -537,6 +535,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = U9MWKD9XCH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = gavel;
 				INFOPLIST_KEY_NSCameraUsageDescription = "手元動作の映像を撮影するためにカメラを使用します。";
@@ -725,6 +724,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = U9MWKD9XCH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = gavel;
 				INFOPLIST_KEY_NSCameraUsageDescription = "手元動作の映像を撮影するためにカメラを使用します。";
